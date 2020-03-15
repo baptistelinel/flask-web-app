@@ -6,7 +6,7 @@
 make start_app
 ```
 
-The application runs on http://localhost:8888.
+The application runs on http://localhost:5000.
 
 ## Docker containers information
 
