@@ -2,16 +2,18 @@ install_requirements:
 	pip install -r requirements.txt
 
 start_app:
-	docker build -t blinel/web_app .
 	docker-compose up
 
+destroy_app:
+	make docker_rm
+	make docker_rmi
+
 docker_rmi:
-	docker rmi blinel/web_app:latest
-	docker rmi python
-	docker rmi postgres
+	docker rmi web_app_web
+	docker rmi web_app_database
 
 docker_rm:
-	docker stop web_app
-	docker rm web_app
-	docker stop postgres
-	docker rm postgres
+	docker stop web
+	docker rm web
+	docker stop database
+	docker rm database
