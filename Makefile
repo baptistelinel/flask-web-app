@@ -8,6 +8,8 @@ destroy_app:
 	make docker_rm
 	make docker_rmi
 
+connect_to_database:
+	docker exec -it database psql products user
 
 docker_rmi:
 	docker rmi web_app_web
