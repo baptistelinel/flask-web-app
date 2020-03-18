@@ -1,22 +1,25 @@
 version: "3"
 services:
-  web:
-    container_name: web
-    build:
-      context: "."
-      dockerfile: "docker/Dockerfile.web"
-    ports:
-      - 5000:5000
-    depends_on:
-      - database
   database:
     container_name: database
     environment:
       POSTGRES_PASSWORD: "password"
       POSTGRES_USER: "user"
       POSTGRES_DB: "products"
+    image: postgres
+    expose:
+      - 5432
+    volumes:
+      - database:/var/run/postgresql
+  web:
+    restart: on-failure
+    container_name: web
     build:
       context: "."
-      dockerfile: "docker/Dockerfile.database"
+      dockerfile: "docker/Dockerfile.web"
     ports:
-    - 5432:5432
+      - 5000:5000
+    volumes:
+      - database:/var/run/postgresql
+volumes:
+  database:

@@ -8,9 +8,10 @@ destroy_app:
 	make docker_rm
 	make docker_rmi
 
+
 docker_rmi:
 	docker rmi web_app_web
-	docker rmi web_app_database
+	docker volume rm `docker volume list -q`
 
 docker_rm:
 	docker stop web
