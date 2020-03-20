@@ -13,7 +13,7 @@ make start_app
 
 Run migration scripts:
 ```
-run_migrations
+make run_migrations
 ```
 
 The application is running on http://localhost:5000.
