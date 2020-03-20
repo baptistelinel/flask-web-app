@@ -6,11 +6,17 @@ Provide an example of Flask application using Postgresql with Docker.
 
 ## Start application
 
+Create containers web and database:
 ```
 make start_app
 ```
 
-The application runs on http://localhost:5000.
+Run migration scripts:
+```
+run_migrations
+```
+
+The application is running on http://localhost:5000.
 
 ## Destroy application
 
