@@ -9,11 +9,14 @@ destroy_app:
 	make docker_rmi
 	docker volume rm `docker volume list -q`
 
+run_migrations:
+	docker exec -it web alembic --config migrations/alembic.ini upgrade head
+
 connect_to_database:
-	docker exec -it database psql products user
+	docker exec -it database psql supermarket user
 
 docker_rmi:
-	docker rmi web_app_web
+	docker rmi web-app_web
 
 docker_rm:
 	docker stop web
