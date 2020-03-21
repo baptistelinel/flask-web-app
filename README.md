@@ -28,8 +28,8 @@ make destroy_app
 
 | Name  |Image  |Port   |
 |---|---|---|
-|web    |web_app_web |5000->5000/tcp |
-|database   |postgres       |5432/tcp |
+|web    |web-app_web |5000->5000/tcp |
+|database   |web-app_database       |5432/tcp |
 
 ## Docker versions
 
