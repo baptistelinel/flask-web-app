@@ -17,6 +17,7 @@ connect_to_database:
 
 docker_rmi:
 	docker rmi web-app_web
+	docker rmi web-app_database
 
 docker_rm:
 	docker stop web
