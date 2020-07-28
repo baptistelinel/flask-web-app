@@ -1,8 +1,11 @@
 import psycopg2
 from flask import Flask
 
+from database_conector import DatabaseConnector
+from product_business import ProductBusiness
+
 app = Flask(__name__)
-connection = psycopg2.connect(database='supermarket', user='user', password='password', host='database', port='5432')
+product_business = ProductBusiness(DatabaseConnector())
 
 
 @app.route('/')
@@ -12,9 +15,7 @@ def hello_world():
 
 @app.route('/products')
 def get_products():
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM products;')
-    return str(cursor.fetchall())
+    return product_business.get_list_products()
 
 
 if __name__ == '__main__':
