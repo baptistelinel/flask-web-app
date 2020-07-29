@@ -1,16 +1,17 @@
-import psycopg2
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 
 class DatabaseConnector:
     def __init__(self):
-        connection = psycopg2.connect(
-            database='supermarket',
-            user='user',
-            password='password',
-            host='database',
-            port='5432')
-        self._cursor = connection.cursor()
+        db_string = 'postgres://user:password@database:5432/supermarket'
+        db = create_engine(db_string)
+        self._session = sessionmaker(db)()
 
-    def run_fetchall_sql(self, sql: str):
-        self._cursor.execute(sql)
-        return str(self._cursor.fetchall())
+    def list_resource(self, resource):
+        return self._session.query(resource)
+
+    def add_resource(self, resource: object) -> None:
+        self._session.add(resource)
+        self._session.commit()
+

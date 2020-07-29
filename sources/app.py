@@ -1,5 +1,4 @@
-import psycopg2
-from flask import Flask
+from flask import Flask, request
 
 from database_conector import DatabaseConnector
 from product_business import ProductBusiness
@@ -13,9 +12,19 @@ def hello_world():
     return 'Hello, World!'
 
 
-@app.route('/products')
-def get_products():
-    return product_business.get_list_products()
+@app.route('/products', methods=['GET', 'POST'])
+def product_resource():
+    if request.method == 'GET':
+        products = product_business.get_list_products()
+        return {
+            'products': products
+        }
+    elif request.method == 'POST':
+        data = request.form
+        product_business.add_product(data)
+        return 'Product added'
+    else:
+        return 'Unauthorized HTTP verb.'
 
 
 if __name__ == '__main__':
